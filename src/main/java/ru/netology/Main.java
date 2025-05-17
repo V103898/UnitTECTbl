@@ -1,24 +1,35 @@
 package ru.netology;
-public class Main {
-    public static final String TEXT = "aaababaabaaaabaabaabaabaaababaabaaababaabaaaabaabaabaabbabaabaaababaababaabaabaabaaabbaab";
-    public static final String PATTERN = "aab";
 
-    public static void main(String[] args) {
+class PatternMatcher {
+
+    public static int countPatternOccurrences(String text, String pattern) {
+        if (text == null || pattern == null || pattern.isEmpty()) {
+            return 0;
+        }
+
         int count = 0;
+        int patternLength = pattern.length();
+        int textLength = text.length();
 
-        for (int i = 0; i < TEXT.length() - PATTERN.length(); i++) {
-
+        for (int i = 0; i <= textLength - patternLength; i++) {
             boolean matches = true;
-            for (int j = 0; j < PATTERN.length(); j++) {
-                if (PATTERN.charAt(j) != TEXT.charAt(j + i)) {
+            for (int j = 0; j < patternLength; j++) {
+                if (pattern.charAt(j) != text.charAt(j + i)) {
                     matches = false;
-                    break; // Вставьте ваш код сюда
+                    break;
                 }
             }
             if (matches) {
                 count++;
             }
         }
-        System.out.println("Строка " + PATTERN + " встретилась в тексте " + count + " раз");
+        return count;
+    }
+
+    public static void main(String[] args) {
+        String text = "aaababaabaaaabaabaabaabaaababaabaaababaabaaaabaabaabaabbabaabaaababaababaabaabaabaaabbaab";
+        String pattern = "aab";
+        int count = countPatternOccurrences(text, pattern);
+        System.out.println("Строка " + pattern + " встретилась в тексте " + count + " раз");
     }
 }
